@@ -16,8 +16,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
 
     void Start()
-    {
-        
+    {        
         playerRgd = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
@@ -25,7 +24,7 @@ public class PlayerController : MonoBehaviour
  
     void Update()
     {
-        if (isDead) return;        
+        if (isDead) return;
         else
         {
             if (Input.GetMouseButtonDown(0) && jumpCount < 2)
@@ -53,6 +52,8 @@ public class PlayerController : MonoBehaviour
         playerRgd.velocity = Vector2.zero;
 
         isDead = true;
+
+        GameManager.instance.OnPlayerDead();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
