@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -16,19 +17,20 @@ public class GameManager : MonoBehaviour
     {
         if(instance == null)
         {
-            instance = this;            
+            instance = this;
         }
         else
         {
             Debug.LogWarning("씬에 두개 이상의 게임매니저가 있습니다.");
             Destroy(gameObject);
         }
-    }    
+    }
     void Update()
     {
         if(isGameover && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            timeState(1);
         }
     }
     public void AddScore(int newScore)
@@ -43,5 +45,25 @@ public class GameManager : MonoBehaviour
     {
         isGameover = true;
         gameoverUI.SetActive(true);
+    }
+    
+    //Btn connect method
+    public void Restart()
+    {
+        //Game Restart function
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);        
+    }
+    public void Exit()
+    {
+        Application.Quit();
+    }
+    public void timeState(int time)
+    {
+        //game pause
+        Time.timeScale = time;
+    }
+    public void audioStop()
+    {
+
     }
 }
